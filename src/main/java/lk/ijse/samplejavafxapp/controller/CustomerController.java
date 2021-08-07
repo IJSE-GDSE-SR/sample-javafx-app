@@ -13,6 +13,7 @@
 package lk.ijse.samplejavafxapp.controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -34,15 +35,20 @@ public class CustomerController {
 
     @FXML
     protected void onClickBtnAddCustomer() {
-        if(lblFormSubmitText != null) {
-            int customerID = Integer.parseInt(txtCustomerID.getText());
-            String customerName = txtCustomerName.getText();
-            String customerPhone = txtCustomerPhone.getText();
-            String customerEmail = txtCustomerEmail.getText();
+        String customerIDString = txtCustomerID.getText();
+        String customerName = txtCustomerName.getText();
+        String customerPhone = txtCustomerPhone.getText();
+        String customerEmail = txtCustomerEmail.getText();
 
-            Customer customer = new Customer(customerID, customerName, customerPhone, customerEmail);
+        if (lblFormSubmitText != null && !customerIDString.equals("") && !customerName.equals("") && !customerPhone.equals("") && !customerEmail.equals("")) {
+            Customer customer = new Customer(Integer.parseInt(customerIDString), customerName, customerPhone, customerEmail);
             System.out.println(customer);
             lblFormSubmitText.setText("Customer added successfully");
+        } else {
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setTitle("Error");
+            a.setContentText("Please enter all details");
+            a.show();
         }
     }
 }
