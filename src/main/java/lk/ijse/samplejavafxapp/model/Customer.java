@@ -1,3 +1,15 @@
+/*
+ * ---------------------------------------------------------------------------------------------
+ *  *  Copyright (c) 2021 - present Sandul Renuja. All rights reserved.
+ *  *  Licensed under the MIT License. See LICENSE in the project root for license information.
+ *  *--------------------------------------------------------------------------------------------
+ */
+
+/*
+ * @author Sandul Renuja <sandulrenuja@gmail.com>
+ * @since  7/8/21
+ */
+
 package lk.ijse.samplejavafxapp.model;
 
 public class Customer {
