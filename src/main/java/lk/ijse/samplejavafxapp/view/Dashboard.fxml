@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+   ============================================================================================
+      Copyright (c) 2021 - present Sandul Renuja. All rights reserved.
+      Licensed under the MIT License. See LICENSE in the project root for license information.
+   ============================================================================================
+-->
+<!--
+   @author Sandul Renuja <sandulrenuja@gmail.com
+   @since  7/8/21
+-->
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.samplejavafxapp.DashboardController">
+   <FlowPane prefHeight="400.0" prefWidth="500.0">
+      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="600.0" text="Dashboard" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="System Italic" size="28.0" />
+         </font>
+         <FlowPane.margin>
+            <Insets bottom="40.0" top="45.0" />
+         </FlowPane.margin>
+      </Label>
+      <Button fx:id="btnCustomer" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onClickBtnCustomer" prefHeight="175.0" prefWidth="200.0" text="Customer Management" textAlignment="CENTER" textFill="#2980b9" wrapText="true">
+         <font>
+            <Font size="24.0" />
+         </font>
+         <FlowPane.margin>
+            <Insets left="75.0" right="25.0" top="10.0" />
+         </FlowPane.margin>
+      </Button>
+      <Button fx:id="btnItem" alignment="CENTER" contentDisplay="CENTER" layoutX="210.0" layoutY="145.0" mnemonicParsing="false" onAction="#onClickBtnItem" prefHeight="175.0" prefWidth="200.0" text="Item Management" textAlignment="CENTER" textFill="#c0392b" wrapText="true">
+         <font>
+            <Font size="24.0" />
+         </font>
+         <FlowPane.margin>
+            <Insets left="25.0" right="75.0" top="10.0" />
+         </FlowPane.margin>
+      </Button>
+   </FlowPane>
+</AnchorPane>

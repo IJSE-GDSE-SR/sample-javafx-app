@@ -24,10 +24,10 @@ import java.util.Objects;
 public class MainApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        Parent load = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("view/Customers.fxml")));
+        Parent load = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("view/Dashboard.fxml")));
         Scene scene = new Scene(load);
         stage.setScene(scene);
-        stage.setTitle("Customer Management");
+        stage.setTitle("Dashboard");
         stage.show();
     }
 
