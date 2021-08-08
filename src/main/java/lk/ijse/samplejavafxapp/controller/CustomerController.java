@@ -13,13 +13,20 @@
 package lk.ijse.samplejavafxapp.controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import lk.ijse.samplejavafxapp.db.DBConnection;
 import lk.ijse.samplejavafxapp.model.Customer;
 
-public class CustomerController {
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
+
+public class CustomerController implements Initializable {
     @FXML
     private TextField txtCustomerID;
     @FXML
@@ -41,10 +48,31 @@ public class CustomerController {
         boolean isValidated = validate(customerIDString, customerName, customerPhone, customerEmail);
 
         if (isValidated) {
-            Customer customer = new Customer(Integer.parseInt(customerIDString), customerName, customerPhone, customerEmail);
-            System.out.println(customer);
-            showAlert(Alert.AlertType.INFORMATION, "Success", "Customer added successfully");
-            clearFields();
+            try {
+                Customer c = new Customer(Integer.parseInt(customerIDString), customerName, customerPhone, customerEmail);
+                System.out.println(c);
+
+                Connection con = DBConnection.getInstance().getConnection();
+                PreparedStatement pst = con.prepareStatement("INSERT INTO customer VALUES (?,?,?,?)");
+                pst.setInt(1, c.getID());
+                pst.setString(2, c.getName());
+                pst.setString(3, c.getPhone());
+                pst.setString(4, c.getEmail());
+
+                boolean isAdded = pst.executeUpdate() > 0;
+
+                if (isAdded) {
+                    showAlert(Alert.AlertType.INFORMATION, "Success", "Customer added successfully");
+                    clearFields();
+                } else {
+                    showAlert(Alert.AlertType.ERROR, "Error", "Oops, that didn't work, please try again");
+                }
+
+            } catch (ClassNotFoundException | SQLException e) {
+                System.out.println("An error occurred while connecting to MySQL DB");
+                showAlert(Alert.AlertType.ERROR, "Error", "An error occurred while connecting MySQL DB");
+                e.printStackTrace();
+            }
         }
     }
 
@@ -75,5 +103,10 @@ public class CustomerController {
             }
         }
         return true;
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
     }
 }

@@ -20,9 +20,15 @@ public class DBConnection {
     private static DBConnection dbCon;
     private Connection con;
 
-    private DBConnection() throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.jdbc.Driver");
-        con = DriverManager.getConnection("jdbc://mysql://localhost:3306/sample_javafx", "java_db_admin", "java@123");
+    private DBConnection() throws SQLException {
+//      Class.forName("com.mysql.cj.jdbc.Driver");
+        String username = "java_db_admin";
+        String password = "java@123";
+        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sample_javafx", username, password);
+
+        if (con != null) {
+            System.out.println("Successfully connected to MySQL DB : sample_javafx");
+        }
     }
 
     public static DBConnection getInstance() throws SQLException, ClassNotFoundException {
