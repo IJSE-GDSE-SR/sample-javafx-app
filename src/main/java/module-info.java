@@ -6,6 +6,7 @@
 module lk.ijse.samplejavafxapp {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.sql;
 
 
     opens lk.ijse.samplejavafxapp to javafx.fxml;
