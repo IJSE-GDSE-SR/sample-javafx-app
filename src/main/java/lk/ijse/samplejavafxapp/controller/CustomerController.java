@@ -29,8 +29,6 @@ public class CustomerController {
     @FXML
     private TextField txtCustomerEmail;
     @FXML
-    private Label lblFormSubmitText;
-    @FXML
     private Button btnAddCustomer;
 
     @FXML
@@ -40,15 +38,42 @@ public class CustomerController {
         String customerPhone = txtCustomerPhone.getText();
         String customerEmail = txtCustomerEmail.getText();
 
-        if (lblFormSubmitText != null && !customerIDString.equals("") && !customerName.equals("") && !customerPhone.equals("") && !customerEmail.equals("")) {
+        boolean isValidated = validate(customerIDString, customerName, customerPhone, customerEmail);
+
+        if (isValidated) {
             Customer customer = new Customer(Integer.parseInt(customerIDString), customerName, customerPhone, customerEmail);
             System.out.println(customer);
-            lblFormSubmitText.setText("Customer added successfully");
-        } else {
-            Alert a = new Alert(Alert.AlertType.ERROR);
-            a.setTitle("Error");
-            a.setContentText("Please enter all details");
-            a.show();
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Customer added successfully");
+            clearFields();
         }
+    }
+
+    private void clearFields() {
+        txtCustomerID.setText("");
+        txtCustomerName.setText("");
+        txtCustomerPhone.setText("");
+        txtCustomerEmail.setText("");
+    }
+
+    private void showAlert(Alert.AlertType type, String header, String content) {
+        Alert a = new Alert(type);
+        a.setHeaderText(header);
+        a.setContentText(content);
+        a.show();
+    }
+
+    private boolean validate(String customerIDString, String customerName, String customerPhone, String customerEmail) {
+        if (customerIDString.equals("") || customerName.equals("") || customerPhone.equals("") || customerEmail.equals("")) {
+            showAlert(Alert.AlertType.ERROR, "Missing inputs", "Please enter all details");
+            return false;
+        } else {
+            try {
+                int customerID = Integer.parseInt(customerIDString);
+            } catch (NumberFormatException e) {
+                showAlert(Alert.AlertType.ERROR, "Invalid Customer ID", "Customer ID should be a number");
+                return false;
+            }
+        }
+        return true;
     }
 }
